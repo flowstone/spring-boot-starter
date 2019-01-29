@@ -1,6 +1,6 @@
 package me.xueyao.model.httpResponse;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
@@ -16,9 +16,7 @@ public class UserResponse {
     private Integer sex;
     private String email;
     private Integer isDeleted;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     public Integer getId() {
@@ -61,7 +59,7 @@ public class UserResponse {
     public void setEmail(String email) {
         this.email = email;
     }
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date getCreateTime() {
         return createTime;
     }
@@ -70,6 +68,7 @@ public class UserResponse {
         this.createTime = createTime;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date getUpdateTime() {
         return updateTime;
     }
