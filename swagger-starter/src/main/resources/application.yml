@@ -24,3 +24,5 @@ mybatis:
     default-statement-timeout: 25000
     #开启驼峰
     map-underscore-to-camel-case: true
+swagger:
+  enabled: true
