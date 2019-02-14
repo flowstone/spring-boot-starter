@@ -1,0 +1,33 @@
+
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/spring_boot_starter?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&&serverTimezone=UTC
+    username: root
+    password: 123456
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+  thymeleaf:
+    cache: false
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    #全局映射器启用缓存
+    cache-enabled: true
+    #查询时,关闭关联对象及时加载以提高性能
+    lazy-loading-enabled: false
+    #按需加载字段(加载字段由SQL指定),不会加载关联表的所有字段,以提高性能
+    aggressive-lazy-loading: false
+    ##允许返回不同的结果集以达到通用的效果
+    multiple-result-sets-enabled: true
+    ##对于批量更新操作缓存SQL以提高性能
+    default-executor-type: reuse
+    #数据库执行超时时间
+    default-statement-timeout: 25000
+    #开启驼峰
+    map-underscore-to-camel-case: true
