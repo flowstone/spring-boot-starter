@@ -4,8 +4,6 @@ import me.xueyao.model.entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 /**
  * @Description:
  * @Author: Simon.Xue
@@ -14,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface UserMapper {
 
-    Optional<User> selectUserById(@Param("id") int id);
+    User selectUserById(@Param("id") int id);
 
     int updateUser(User user);
 
@@ -22,5 +20,5 @@ public interface UserMapper {
 
     int insertUser(User user);
 
-    Optional<User> selectUserByUsername(@Param("username") String username);
+    User selectUserByUsername(@Param("username") String username);
 }

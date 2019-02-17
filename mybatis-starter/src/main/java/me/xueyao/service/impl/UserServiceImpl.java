@@ -12,8 +12,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 /**
  * @Description:
  * @Author: Simon.Xue
@@ -29,10 +27,10 @@ public class UserServiceImpl implements UserService {
     public BaseResponse getUser(int id) {
         logger.info("查询用户信息>>>>");
         BaseResponse baseResponse = new BaseResponse();
-        Optional<User> user = userMapper.selectUserById(id);
+        User user = userMapper.selectUserById(id);
         UserResponse userResponse = new UserResponse();
-        BeanUtils.copyProperties(user.get(), userResponse);
-        if (!user.isPresent()) {
+        BeanUtils.copyProperties(user, userResponse);
+        if (null == user) {
             logger.info("查询用户信息为空");
             baseResponse.setCode(ResponseStatus.SUCCESS.getCode());
             baseResponse.setMessage("查询用户信息为空");
@@ -49,8 +47,8 @@ public class UserServiceImpl implements UserService {
     public BaseResponse addUser(User user) {
         logger.info("添加用户信息>>>>");
         BaseResponse baseResponse = new BaseResponse();
-        Optional<User> userExist = userMapper.selectUserByUsername(user.getUsername());
-        if (userExist.isPresent()) {
+        User userExist = userMapper.selectUserByUsername(user.getUsername());
+        if (null != userExist) {
             logger.warn("用户已存在，请勿重复添加");
             baseResponse.setCode(ResponseStatus.EXCEPTION.getCode());
             baseResponse.setMessage("用户已存在，请勿重复添加");
@@ -90,8 +88,8 @@ public class UserServiceImpl implements UserService {
     public BaseResponse removeUser(int id) {
         logger.info("删除用户信息>>>>");
         BaseResponse baseResponse = new BaseResponse(ResponseStatus.EXCEPTION);
-        Optional<User> userExist = userMapper.selectUserById(id);
-        if (!userExist.isPresent()) {
+        User userExist = userMapper.selectUserById(id);
+        if (null == userExist) {
             logger.warn("用户信息不存在");
             baseResponse.setMessage("用户信息不存在");
             return baseResponse;
