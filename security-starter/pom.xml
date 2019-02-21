@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>me.xueyao</groupId>
-    <artifactId>spring-security-starter</artifactId>
+    <artifactId>security-starter</artifactId>
     <version>0.0.1</version>
-    <name>spring-security-starter</name>
+    <name>security-starter</name>
     <description>Spring Security for Spring Boot</description>
 
     <properties>
