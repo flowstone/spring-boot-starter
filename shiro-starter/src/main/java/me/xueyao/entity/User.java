@@ -1,92 +1,41 @@
 package me.xueyao.entity;
 
-import java.time.LocalDate;
+import lombok.Data;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 /**
  * @author: Simon.Xue
  * @date: 2019/2/22 17:07
  */
+@Data
+@Entity
 public class User {
+    @Id
     private Integer id;
+    @Column(name = "username", columnDefinition = "VARCHAR(32) NOT NULL DEFAULT '' COMMENT '用户名'")
     private String username;
+    @Column(name = "password", columnDefinition = "VARCHAR(64) NOT NULL DEFAULT '' COMMENT '密码'")
     private String password;
+    @Column(columnDefinition = "VARCHAR(32) COMMENT '昵称'")
     private String nickname;
+    @Column(columnDefinition = "VARCHAR(64) COMMENT '盐'")
+    private String salt;
+    @Column(columnDefinition = "TINYINT DEFAULT 0 COMMENT '性别 0女 1男'")
     private Integer sex;
+    @Column(columnDefinition = "VARCHAR(64) COMMENT '邮箱'")
     private String email;
+    @Column(name = "is_deleted", columnDefinition = "TINYINT DEFAULT 0 COMMENT '是否删除 0未删除 1删除'")
     private Integer deleted;
+    @Column(columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'")
     private LocalDateTime createTime;
+    @Column(columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'")
     private LocalDateTime updateTime;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public Integer getSex() {
-        return sex;
-    }
-
-    public void setSex(Integer sex) {
-        this.sex = sex;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
+    public String getCredentialsSalt() {
+        return this.username + this.salt;
     }
 }

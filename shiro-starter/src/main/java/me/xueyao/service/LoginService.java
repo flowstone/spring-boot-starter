@@ -1,8 +1,6 @@
 package me.xueyao.service;
 
 import me.xueyao.common.BaseResponse;
-import me.xueyao.entity.Role;
-import me.xueyao.entity.User;
 
 /**
  * @Description:
@@ -11,9 +9,7 @@ import me.xueyao.entity.User;
  */
 public interface LoginService {
 
-    BaseResponse addUser(User user);
+    BaseResponse login(String username, String password);
 
-    BaseResponse addRole(Role role);
-
-    BaseResponse getByName(String name);
+    BaseResponse logout();
 }
