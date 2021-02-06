@@ -22,29 +22,30 @@ public class HomeController {
     private LoginService loginService;
 
     @GetMapping("/403")
-    public String unauthorizedRole() {
+    public BaseResponse unauthorizedRole() {
         log.info("没有权限");
-        return null;
+        return new BaseResponse(ResponseStatus.EXCEPTION, "没有权限");
     }
 
     @GetMapping("/index")
-    public String index() {
+    public BaseResponse index() {
         log.info("首页");
-        return null;
+        return new BaseResponse(ResponseStatus.SUCCESS, "首页");
     }
 
     @GetMapping("/login")
-    public String toLogin() {
-        return "需要登陆";
+    public BaseResponse toLogin() {
+        log.info("需要登录");
+        return new BaseResponse(ResponseStatus.SUCCESS, "需要登录");
     }
     @PostMapping("/toLogin")
-    public String login(@RequestParam("username")String username,
+    public BaseResponse login(@RequestParam("username")String username,
                         @RequestParam("password")String password) {
         log.info("登陆");
         BaseResponse login = loginService.login(username, password);
         if (login.getCode().equals(ResponseStatus.SUCCESS)) {
             log.info("登陆成功");
         }
-        return "登陆成功";
+        return new BaseResponse(ResponseStatus.SUCCESS, "登陆成功");
     }
 }

@@ -54,7 +54,7 @@ public class ShiroConfig {
         //散列算法：这里使用MD5算法
         hashedCredentialsMatcher.setHashAlgorithmName("md5");
         //散列的次数，比如散列两次
-        hashedCredentialsMatcher.setHashIterations(2);
+        //hashedCredentialsMatcher.setHashIterations(2);
         return hashedCredentialsMatcher;
     }
 

@@ -2,6 +2,7 @@ package me.xueyao.config;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import me.xueyao.entity.User;
 import me.xueyao.service.UserService;
 import me.xueyao.vo.RolePermissionVo;
 import me.xueyao.vo.UserVo;
@@ -13,7 +14,6 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -30,9 +30,10 @@ public class MyShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-
-        UserVo userVo = (UserVo) principals.getPrimaryPrincipal();
+        User user = (User) principals.getPrimaryPrincipal();
+        UserVo userVo = userService.findUserByName(user.getUsername());
         List<RolePermissionVo> rolePermissionVoList = userVo.getRolePermissionVoList();
+
         rolePermissionVoList.forEach(rolePermissionVo -> {
             simpleAuthorizationInfo.addRole(rolePermissionVo.getRoleName());
             rolePermissionVo.getPermissionList().forEach(permission -> {
@@ -61,7 +62,8 @@ public class MyShiroRealm extends AuthorizingRealm {
                 userVo.getUser(),
                 //密码
                 userVo.getUser().getPassword(),
-                ByteSource.Util.bytes(userVo.getUser().getSalt()),
+                //不需要盐了
+                //ByteSource.Util.bytes(userVo.getUser().getSalt()),
                 getName()
         );
         return authenticationInfo;
