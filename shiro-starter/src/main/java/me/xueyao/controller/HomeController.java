@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.xueyao.common.BaseResponse;
 import me.xueyao.common.ResponseStatus;
 import me.xueyao.service.LoginService;
+import me.xueyao.util.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,7 @@ public class HomeController {
 
     @GetMapping("/index")
     public BaseResponse index() {
-        log.info("首页");
+        log.info("首页, loginUserId = {}", ShiroUtils.getUserId());
         return new BaseResponse(ResponseStatus.SUCCESS, "首页");
     }
 

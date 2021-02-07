@@ -6,6 +6,7 @@ import me.xueyao.entity.User;
 import me.xueyao.service.UserService;
 import me.xueyao.vo.RolePermissionVo;
 import me.xueyao.vo.UserVo;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -67,5 +68,13 @@ public class MyShiroRealm extends AuthorizingRealm {
                 getName()
         );
         return authenticationInfo;
+    }
+
+    /**
+     * 清理缓存权限
+     */
+    public void clearCachedAuthorizationInfo()
+    {
+        this.clearCachedAuthorizationInfo(SecurityUtils.getSubject().getPrincipals());
     }
 }
