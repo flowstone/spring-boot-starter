@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/user")
-@Api(description = "用户控制")
+@Api(tags = "用户控制")
 public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
